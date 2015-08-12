@@ -6,7 +6,7 @@ angular.module('app').controller('mainCtrl', MainCtrl);
 MainCtrl.$inject = ['$scope'];
 
 function MainCtrl($scope) {
-    $scope.user = {
+    $scope.user1 = {
         name: 'Luke Skywalker',
         address: {
             street: 'PO Box 123',
@@ -19,11 +19,34 @@ function MainCtrl($scope) {
                 'Chewbacca'
             ]
     };
+
+    $scope.user2 = {
+        name: 'Han Solo',
+        address: {
+            street: 'PO Box 123',
+            city: 'Mos Eisley',
+            planet: 'Tattoine'
+        },
+        friends: [
+            'Luke',
+            'Leia',
+            'Chewbacca'
+        ]
+    };
 }
 
 angular.module('app').directive('userInfoCard', function () {
     return {
         templateUrl: 'html/userInfoCard.html',
-        restrict: 'E'
+        restrict: 'E',
+        scope: {
+            user: '='
+        },
+        controller: function ($scope) {
+            $scope.knightMe = function (user) {
+                user.rank = 'Knight';
+            };
+            console.log($scope);
+        }
     };
 });
